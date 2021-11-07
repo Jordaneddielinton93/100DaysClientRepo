@@ -1,7 +1,20 @@
+import { useEffect, useState } from "react";
 import DateAndBox from "./Component/DateAndBox";
 import { DayTrackerStyled } from "./DayTracker.style";
 
 const DayTracker = () => {
+
+  let [data,setData]=useState(false)
+
+  async function getHerokuData(){
+  const response = await fetch("https://one-hundred-days-of-code.herokuapp.com/user/profiles")
+  const data = await response.json()
+  console.log(data)
+  setData(data)
+  }
+  useEffect(()=>{
+    getHerokuData()
+  },[])
 
   const date = new Date();
 
@@ -22,26 +35,28 @@ const DayTracker = () => {
       return [day,month,year]
     }
 
-  let listOfOrderedDays=[]
+  let listOfOrderedDays4BeforeAnd4AfterToday=[]
   for(let i=1;i<10;i++){
     if(i<5){
-      listOfOrderedDays.unshift(getTheDateBeforeTodayWithGivenNumber(i))
+      listOfOrderedDays4BeforeAnd4AfterToday.unshift(getTheDateBeforeTodayWithGivenNumber(i))
     }
     if(i===5){
       // gets the day and month
-      listOfOrderedDays.push(["Today, "+`${date}`.split(" ")[2] +" "+`${date}`.split(" ")[1]])
+      listOfOrderedDays4BeforeAnd4AfterToday.push(["Today, "+`${date}`.split(" ")[2] +" "+`${date}`.split(" ")[1]])
     }
     if(i>5){
-      listOfOrderedDays.push(getTheDateAfterTodayWithGivenNumber(i-5))
+      listOfOrderedDays4BeforeAnd4AfterToday.push(getTheDateAfterTodayWithGivenNumber(i-5))
     }
   }
-  console.log(listOfOrderedDays)
 
-
+  
   return ( 
     <DayTrackerStyled>
-      {listOfOrderedDays.map((date,index)=>{
-        return <DateAndBox day={date[0]} Width={"50px"}/>
+      {listOfOrderedDays4BeforeAnd4AfterToday.map((datefromList,index)=>{
+        return data && 
+        <DateAndBox day={datefromList[0]} Width={"50px"}
+        text={data[0].list_of_dates_posted.includes(datefromList[0])&&"tick"}
+        />
       })}
     </DayTrackerStyled>
    );

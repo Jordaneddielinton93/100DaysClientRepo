@@ -1,4 +1,4 @@
-const DateAndBox = ({day,Width}) => {
+const DateAndBox = ({day,Width,text}) => {
 
   const dateAndBoxStyles={
     display:"flex",
@@ -14,14 +14,15 @@ const DateAndBox = ({day,Width}) => {
     minHeight:"48%",
     width:"95%",
     backgroundColor:"#FFD700",
-    cursor:"pointer"
+    cursor:"pointer",
+    boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
   }
 
   return ( 
     <div style={dateAndBoxStyles}>
       <h1 style={{fontWeight:"300"}}>{day}</h1>
       <span style={boxStyle}>
-
+        {text}
       </span>
     </div>
    );
