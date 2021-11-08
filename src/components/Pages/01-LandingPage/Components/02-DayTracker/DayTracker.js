@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DateAndBox from "./Component/DateAndBox";
 import { DayTrackerStyled } from "./DayTracker.style";
-
+import { AiFillBug } from 'react-icons/ai';
 const DayTracker = () => {
 
   let [data,setData]=useState(false)
@@ -55,7 +55,7 @@ const DayTracker = () => {
       {listOfOrderedDays4BeforeAnd4AfterToday.map((datefromList,index)=>{
         return data && 
         <DateAndBox day={datefromList[0]} Width={"50px"}
-        text={data[0].list_of_dates_posted.includes(datefromList[0])&&"tick"}
+        text={data[0].list_of_dates_posted.includes(datefromList[0])&&<AiFillBug/>}
         />
       })}
     </DayTrackerStyled>

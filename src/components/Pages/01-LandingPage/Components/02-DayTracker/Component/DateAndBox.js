@@ -10,6 +10,11 @@ const DateAndBox = ({day,Width,text}) => {
   }
 
   const boxStyle={
+    display: "flex",
+    alignItems:"center",
+    justifyContent:"center",
+    color:"white",
+    fontSize:"2rem",
     border:"solid 2px black",
     minHeight:"48%",
     width:"95%",
